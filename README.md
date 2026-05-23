@@ -35,8 +35,6 @@ The site reads four URL params on load. Send a recruiter the tuned link for thei
 | Audience | URL suffix |
 |---|---|
 | FAANG / Big tech | `?style=studio&theme=light&accent=ink` |
-| Quant (Jane Street, Citadel, HRT) | `?style=engineer&theme=dark&accent=cobalt` |
-| Big 4 consulting | `?style=editorial&theme=light&accent=cobalt` |
 | Founder / YC / startup | `?style=engineer&theme=dark&accent=olive` |
 | Editorial / design-aware | `?style=editorial&theme=light&accent=terracotta` |
 
