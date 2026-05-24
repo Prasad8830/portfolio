@@ -798,7 +798,7 @@
   .footer-meta a:hover { color: var(--ink); }
   .socials { display: flex; gap: 20px; }
 
-  /* Style-specific heading sizing */
+  /* Style-specific heading sizing — keep "Prasad Shinde—" on one line at 1280px+ */
   html[data-style="studio"] .hero h1 {
     font-size: clamp(44px, 8vw, 140px);
     letter-spacing: -0.045em;
@@ -811,9 +811,25 @@
     letter-spacing: -0.04em;
   }
   html[data-style="engineer"] .hero h1 {
-    font-size: clamp(54px, 10vw, 170px);
+    font-size: clamp(50px, 9vw, 150px);
     font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
   }
+  html[data-style="editorial"] .hero h1 {
+    font-size: clamp(56px, 10.5vw, 175px);
+    line-height: 0.92;
+  }
+
+  /* Section titles ("Things I've made...") match scale of hero */
+  html[data-style="studio"] .work-title    { font-size: clamp(36px, 5vw, 72px); }
+  html[data-style="engineer"] .work-title  { font-size: clamp(38px, 5.2vw, 80px); }
+  html[data-style="editorial"] .work-title { font-size: clamp(40px, 6vw, 96px); }
+
+  /* Footer "Let's build" — same scale ladder */
+  html[data-style="studio"] .footer-big    { font-size: clamp(48px, 8vw, 130px); }
+  html[data-style="engineer"] .footer-big  { font-size: clamp(50px, 9vw, 150px); }
+  html[data-style="editorial"] .footer-big { font-size: clamp(54px, 10vw, 160px); }
 
   /* CV button */
   .hero-cta {
