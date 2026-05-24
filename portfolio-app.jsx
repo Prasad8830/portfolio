@@ -54,6 +54,7 @@ const EXPERIENCE = [
   year: "Mar 2026 — Now",
   role: "Software Development Intern",
   roleIt: " · Pranissa",
+  companyUrl: "https://www.linkedin.com/company/pranissa/",
   org: "Building a subscription-based longevity intelligence platform",
   desc: "Driving Next.js + FastAPI + Postgres work powering 120+ APIs and 50M+ biomarker pipelines. Migrating 87+ TSX components & 24K+ lines of CSS off legacy React/Vite onto a modular Next.js stack on AWS.",
   tags: ["Next.js", "FastAPI", "Postgres", "AWS"]
@@ -62,6 +63,7 @@ const EXPERIENCE = [
   year: "Mar — Apr 2026",
   role: "Full-Stack Development Intern",
   roleIt: " · Atom Pluton Technology",
+  companyUrl: "https://www.linkedin.com/company/pluton-technology/",
   org: "PromptVault — an AI prompt marketplace",
   desc: "Architected core modules of an AI prompt marketplace (Next.js 14, NestJS, Redis) supporting 100K+ prompts. Shipped a metadata-driven Prompt Detail system rendering 10+ output formats, plus semantic search and creator analytics, in a 7-person team.",
   tags: ["Next.js 14", "NestJS", "Redis"]
@@ -70,6 +72,7 @@ const EXPERIENCE = [
   year: "Jun — Oct 2025",
   role: "Full-Stack Development Intern",
   roleIt: " · Gigglz",
+  companyUrl: "https://www.linkedin.com/company/gigglz/",
   org: "A real-time gig-work platform",
   desc: "Shipped 10+ scalable features across React, FastAPI and Postgres. Cut group-chat latency by ~40% by overhauling backend pipelines and API response handling. Delivered 15+ responsive UI components inside an 8-person agile team.",
   tags: ["React", "FastAPI", "Postgres"]
@@ -362,7 +365,7 @@ function Hero() {
                 rel="noopener noreferrer">
                 Download CV
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                  <path d="M12 4v13m0 0l-5-5m5 5l5-5M5 20h14"/>
+                  <path d="M12 4v13m0 0l-5-5m5 5l5-5M5 20h14" />
                 </svg>
               </a>
             </Magnetic>
@@ -372,7 +375,7 @@ function Hero() {
                 href="mailto:prasadshinde8830@gmail.com">
                 Get in touch
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                  <path d="M5 12h14M13 5l7 7-7 7"/>
+                  <path d="M5 12h14M13 5l7 7-7 7" />
                 </svg>
               </a>
             </Magnetic>
@@ -519,14 +522,14 @@ function Work() {
         </h2>
       </div>
       <div className="work-list">
-        {PROJECTS.map((p, i) => (
-          <Reveal
-            key={p.n}
-            as="a"
-            href={p.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project">
+        {PROJECTS.map((p, i) =>
+        <Reveal
+          key={p.n}
+          as="a"
+          href={p.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="project">
             <div className="project-row">
               <div className="project-num">{p.n}</div>
               <div className="project-name">
@@ -536,15 +539,15 @@ function Work() {
               <div className="project-year">{p.year}</div>
               <div className="project-arrow" aria-hidden="true">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                  <path d="M5 12h14M13 5l7 7-7 7"/>
+                  <path d="M5 12h14M13 5l7 7-7 7" />
                 </svg>
               </div>
             </div>
           </Reveal>
-        ))}
+        )}
       </div>
-    </section>
-  );
+    </section>);
+
 }
 
 // ============ EXPERIENCE ============
@@ -564,7 +567,10 @@ function Experience() {
             <div className="exp-year">{e.year}</div>
             <div>
               <div className="exp-role">
-                {e.role}<span className="it">{e.roleIt}</span>
+                {e.role}
+                {e.companyUrl ?
+                <a className="it exp-company-link" href={e.companyUrl} target="_blank" rel="noopener noreferrer">{e.roleIt}</a> :
+                <span className="it">{e.roleIt}</span>}
               </div>
               <div className="exp-org">{e.org}</div>
             </div>
@@ -719,6 +725,30 @@ function Footer() {
 }
 
 // ============ NAV ============
+function BackToTop() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > 480);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  return (
+    <button
+      className={"to-top " + (show ? "show" : "")}
+      onClick={scrollTop}
+      aria-label="Back to top">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 19V5" />
+        <path d="M5 12l7-7 7 7" />
+      </svg>
+    </button>);
+
+}
+
 function Nav({ theme, setTheme }) {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -750,7 +780,7 @@ function Nav({ theme, setTheme }) {
           rel="noopener noreferrer">
           CV
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 4v13m0 0l-5-5m5 5l5-5"/>
+            <path d="M12 4v13m0 0l-5-5m5 5l5-5" />
           </svg>
         </a>
         <button
@@ -781,15 +811,15 @@ const ACCENT_OPTIONS = [
 ["#2a5fb8", "#6ea3ff"], // cobalt
 ["#6a7d31", "#9bb35a"], // olive
 ["#7e2b56", "#b5638a"], // plum
-["#0a0a0a", "#fafafa"]  // ink
+["#0a0a0a", "#fafafa"] // ink
 ];
 
 const ACCENT_NAME_TO_PAIR = {
   terracotta: ACCENT_OPTIONS[0],
-  cobalt:     ACCENT_OPTIONS[1],
-  olive:      ACCENT_OPTIONS[2],
-  plum:       ACCENT_OPTIONS[3],
-  ink:        ACCENT_OPTIONS[4],
+  cobalt: ACCENT_OPTIONS[1],
+  olive: ACCENT_OPTIONS[2],
+  plum: ACCENT_OPTIONS[3],
+  ink: ACCENT_OPTIONS[4]
 };
 const ACCENT_PAIR_TO_NAME = (pair) => {
   if (!Array.isArray(pair)) return "cobalt";
@@ -801,11 +831,11 @@ const ACCENT_PAIR_TO_NAME = (pair) => {
 
 // Curated presets per audience
 const PRESETS = {
-  faang:  { label: "FAANG",     style: "studio",    theme: "light", accent: "ink"        },
-  quant:  { label: "Quant",     style: "engineer",  theme: "dark",  accent: "cobalt"     },
-  big4:   { label: "Big 4",     style: "editorial", theme: "light", accent: "cobalt"     },
-  studio: { label: "Founder",   style: "engineer",  theme: "dark",  accent: "olive"      },
-  warm:   { label: "Editorial", style: "editorial", theme: "light", accent: "terracotta" },
+  faang: { label: "FAANG", style: "studio", theme: "light", accent: "ink" },
+  quant: { label: "Quant", style: "engineer", theme: "dark", accent: "cobalt" },
+  big4: { label: "Big 4", style: "editorial", theme: "light", accent: "cobalt" },
+  studio: { label: "Founder", style: "engineer", theme: "dark", accent: "olive" },
+  warm: { label: "Editorial", style: "editorial", theme: "light", accent: "terracotta" }
 };
 
 // hex → "r g b" for oklch-soft fallback via rgb()
@@ -826,16 +856,16 @@ function App() {
     const params = new URLSearchParams(window.location.search);
     const updates = {};
     const style = params.get("style");
-    if (["editorial","engineer","studio"].includes(style)) updates.style = style;
+    if (["editorial", "engineer", "studio"].includes(style)) updates.style = style;
     const t = params.get("theme");
-    if (["light","dark"].includes(t)) {
+    if (["light", "dark"].includes(t)) {
       updates.theme = t;
       setThemeState(t);
     }
     const accent = params.get("accent");
     if (accent && ACCENT_NAME_TO_PAIR[accent]) updates.accent = ACCENT_NAME_TO_PAIR[accent];
     const density = params.get("density");
-    if (["compact","comfortable","airy"].includes(density)) updates.density = density;
+    if (["compact", "comfortable", "airy"].includes(density)) updates.density = density;
     if (Object.keys(updates).length) {
       Object.entries(updates).forEach(([k, v]) => setTweak(k, v));
     }
@@ -867,7 +897,7 @@ function App() {
       ta.value = url;
       document.body.appendChild(ta);
       ta.select();
-      try { document.execCommand("copy"); } catch (e) {}
+      try {document.execCommand("copy");} catch (e) {}
       ta.remove();
     }
     setCopied(true);
@@ -912,6 +942,7 @@ function App() {
     <>
       <Cursor />
       <Nav theme={theme} setTheme={setTheme} />
+      <BackToTop />
       <Hero />
       <Marquee />
       <About />
@@ -927,15 +958,15 @@ function App() {
       <TweaksPanel title="Tweaks">
         <TweakSection label="Presets">
           <div className="preset-row">
-            {Object.entries(PRESETS).map(([key, p]) => (
-              <button
-                key={key}
-                className="preset-btn"
-                onClick={() => applyPreset(key)}
-                title={`${p.style} · ${p.theme} · ${p.accent}`}>
+            {Object.entries(PRESETS).map(([key, p]) =>
+            <button
+              key={key}
+              className="preset-btn"
+              onClick={() => applyPreset(key)}
+              title={`${p.style} · ${p.theme} · ${p.accent}`}>
                 {p.label}
               </button>
-            ))}
+            )}
           </div>
           <button className="share-btn" onClick={copyShareLink}>
             {copied ? "✓ Copied" : "Copy share link →"}
@@ -947,18 +978,18 @@ function App() {
             value={tweaks.style}
             onChange={(v) => setTweak("style", v)}
             options={[
-              { value: "editorial", label: "Editorial" },
-              { value: "engineer",  label: "Engineer" },
-              { value: "studio",    label: "Studio" }
-            ]} />
+            { value: "editorial", label: "Editorial" },
+            { value: "engineer", label: "Engineer" },
+            { value: "studio", label: "Studio" }]
+            } />
           <TweakRadio
             label="Mode"
             value={theme}
             onChange={(v) => setTheme(v)}
             options={[
-              { value: "light", label: "Light" },
-              { value: "dark",  label: "Dark"  }
-            ]} />
+            { value: "light", label: "Light" },
+            { value: "dark", label: "Dark" }]
+            } />
           <TweakColor
             label="Accent"
             value={tweaks.accent}
@@ -971,10 +1002,10 @@ function App() {
             value={tweaks.density}
             onChange={(v) => setTweak("density", v)}
             options={[
-              { value: "compact",     label: "Compact" },
-              { value: "comfortable", label: "Comfy"   },
-              { value: "airy",        label: "Airy"    }
-            ]} />
+            { value: "compact", label: "Compact" },
+            { value: "comfortable", label: "Comfy" },
+            { value: "airy", label: "Airy" }]
+            } />
         </TweakSection>
       </TweaksPanel>
     </>);

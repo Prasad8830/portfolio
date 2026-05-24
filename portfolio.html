@@ -589,7 +589,14 @@
     line-height: 1.15;
     letter-spacing: -0.01em;
   }
-  .exp-role .it { font-style: italic; color: var(--ink-2); }
+  .exp-role .it { font-style: italic; color: var(--ink-2); transition: color 0.4s var(--transition); }
+  .exp-company-link {
+    cursor: pointer;
+    transition: color 0.4s var(--transition);
+  }
+  .exp-row:hover .exp-role .it,
+  .exp-row:hover .exp-company-link,
+  html[data-style] .exp-row:hover .exp-role .it { color: var(--accent); }
   .exp-org {
     font-family: var(--sans);
     font-size: 14px;
@@ -796,7 +803,55 @@
   }
   .footer-meta a { transition: color 0.3s; }
   .footer-meta a:hover { color: var(--ink); }
-  .socials { display: flex; gap: 20px; }
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    align-items: center;
+  }
+  @media (max-width: 700px) {
+    .footer-meta { gap: 18px; }
+    .socials { width: 100%; gap: 10px 16px; }
+    .socials a { white-space: nowrap; }
+  }
+
+  /* ==== Back-to-top FAB (mobile only) ==== */
+  .to-top {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 60;
+    width: 44px;
+    height: 44px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: color-mix(in oklab, var(--bg) 80%, transparent);
+    backdrop-filter: blur(10px);
+    color: var(--ink);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.35s var(--transition), transform 0.35s var(--transition), background 0.3s, border-color 0.3s;
+    font-family: var(--mono);
+  }
+  .to-top.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+  .to-top:hover, .to-top:focus-visible {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .to-top svg { display: block; }
+  @media (max-width: 700px) {
+    .to-top { display: inline-flex; }
+  }
 
   /* Style-specific heading sizing — keep "Prasad Shinde—" on one line at 1280px+ */
   html[data-style="studio"] .hero h1 {
