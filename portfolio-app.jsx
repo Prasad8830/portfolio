@@ -69,7 +69,7 @@ const EXPERIENCE = [
     tags: ["Next.js 14", "NestJS", "Redis"]
   },
   {
-    year: "Jun — Oct 2025",
+    year: "Jun — Aug 2025",
     role: "Full-Stack Development Intern",
     roleIt: " · Gigglz",
     companyUrl: "https://www.linkedin.com/company/gigglz/",
@@ -803,8 +803,7 @@ const DEFAULTS = /*EDITMODE-BEGIN*/{
   "theme": "dark"
 } /*EDITMODE-END*/;
 
-const CV_URL = "https://drive.google.com/file/d/14YNsv-QUAzL5fMBdUFaAiN6L4iR7XvxW/view?usp=sharing";
-
+const CV_URL = "https://drive.google.com/file/d/1je9OqEXj1jXGRKlxOcJ6TTgB0xro2fLX/view?usp=sharing"
 // Accent options as [light-mode hex, dark-mode hex]
 const ACCENT_OPTIONS = [
   ["#b9602c", "#d6884a"], // terracotta
