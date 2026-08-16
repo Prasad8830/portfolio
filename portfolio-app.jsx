@@ -11,6 +11,7 @@ const PROJECTS = [
     year: "'26",
     glyph: "S",
     prv: "prv-1",
+    shot: "shots/synthetic-bull-terminal.jpg",
     href: "https://github.com/rkhall-iitkgp/SyntheticBullApp.git",
     desc: "Low-latency limit order book + matching engine in C++ processing 100+ events/sec, paired with a TradingView terminal. Built with a 12-person hall team — won 1st place at OpenSoft'26."
   },
@@ -22,6 +23,7 @@ const PROJECTS = [
     year: "'25",
     glyph: "V",
     prv: "prv-3",
+    shot: "shots/vibemeter-dashboard.jpg",
     href: "https://github.com/rkhall-iitkgp/vibemeter-frontend-2025.git",
     desc: "LangGraph multi-agent system with an ANOVA-inspired risk-scoring engine across 6+ HR datasets. Built for the Deloitte South Asia Coding Challenge."
   },
@@ -33,6 +35,7 @@ const PROJECTS = [
     year: "'25",
     glyph: "W",
     prv: "prv-4",
+    shot: "shots/wanderlust-listings.jpg",
     href: "https://github.com/Prasad8830/Wanderlust.git",
     desc: "A full-stack hotel booking app with Passport.js auth, Mapbox geolocation and Cloudinary storage. MVC architecture, deployed on Render."
   },
@@ -44,6 +47,7 @@ const PROJECTS = [
     year: "'25",
     glyph: "F",
     prv: "prv-2",
+    shot: "shots/fugacity-landing.jpg",
     href: "https://github.com/Prasad8830/ChEA_Fugacity.git",
     desc: "Full-stack website for ChEA's annual fest — 500+ participants. Dynamic modules for event listings, sponsor highlights, schedules and real-time announcements; tuned with lazy-loading, image compression and state optimisation."
   }];
@@ -148,7 +152,8 @@ const SKILLS = [
   {
     title: "AI / Agents",
     items: [
-      ["OpenAI / Gemini / Whisper", "proficient"],
+      ["Claude / OpenAI / Gemini", "proficient"],
+      ["Whisper", "proficient"],
       ["DeepSeek", "familiar"],
       ["SQLAlchemy", "familiar"]]
 
@@ -393,11 +398,30 @@ function Hero() {
         </Reveal>
 
         <Reveal className="hero-meta">
-          <div><b>Lat / Lon</b><br />22.31°N, 87.30°E</div>
           <div><b>Local time</b><br /><span className="hero-time">{time} IST</span></div>
           <div><b>Currently</b><br />Shipping @ Pranissa</div>
+          <div><b>Based in</b><br />Kharagpur, IN · remote-ready</div>
         </Reveal>
       </div>
+
+      <Reveal className="hero-proof" stagger>
+        <div>
+          <div className="hero-proof-n">120<span className="u">+</span></div>
+          <div className="hero-proof-l">APIs shipped in production</div>
+        </div>
+        <div>
+          <div className="hero-proof-n">50<span className="u">M+</span></div>
+          <div className="hero-proof-l">Biomarker records processed</div>
+        </div>
+        <div>
+          <div className="hero-proof-n">100<span className="u">/s</span></div>
+          <div className="hero-proof-l">Events through a C++ matching engine</div>
+        </div>
+        <div>
+          <div className="hero-proof-n">4</div>
+          <div className="hero-proof-l">Startup internships shipped</div>
+        </div>
+      </Reveal>
     </header>);
 
 }
@@ -521,6 +545,40 @@ function Stats() {
 
 // ============ WORK ============
 function Work() {
+  const [active, setActive] = useState(-1);
+  // only projects the pointer has touched get their image element — nothing loads on first paint
+  const [seen, setSeen] = useState(() => []);
+  const preview = useRef(null);
+  const target = useRef({ x: -600, y: -600 });
+  const cur = useRef({ x: -600, y: -600 });
+  const raf = useRef(null);
+
+  useEffect(() => {
+    const onMove = (e) => {
+      target.current = { x: e.clientX, y: e.clientY };
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    const loop = () => {
+      cur.current.x += (target.current.x - cur.current.x) * 0.12;
+      cur.current.y += (target.current.y - cur.current.y) * 0.12;
+      const el = preview.current;
+      if (el) {
+        const w = el.offsetWidth || 420;
+        const h = el.offsetHeight || 260;
+        // keep the panel inside the viewport
+        const x = Math.min(Math.max(cur.current.x - w / 2, 12), window.innerWidth - w - 12);
+        const y = Math.min(Math.max(cur.current.y - h - 28, 12), window.innerHeight - h - 12);
+        el.style.transform = `translate(${x}px, ${y}px)`;
+      }
+      raf.current = requestAnimationFrame(loop);
+    };
+    raf.current = requestAnimationFrame(loop);
+    return () => {
+      cancelAnimationFrame(raf.current);
+      window.removeEventListener("mousemove", onMove);
+    };
+  }, []);
+
   return (
     <section id="work">
       <Reveal className="section-label">Selected work / 04</Reveal>
@@ -530,7 +588,9 @@ function Work() {
           shipped, and shown people.
         </h2>
       </div>
-      <div className="work-list">
+      <div
+        className={"work-list " + (active >= 0 ? "has-active" : "")}
+        onMouseLeave={() => setActive(-1)}>
         {PROJECTS.map((p, i) =>
           <Reveal
             key={p.n}
@@ -538,7 +598,11 @@ function Work() {
             href={p.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="project">
+            className={"project " + (active === i ? "is-active" : "")}
+            onMouseEnter={() => {
+              setActive(i);
+              setSeen((s) => s.includes(i) ? s : [...s, i]);
+            }}>
             <div className="project-row">
               <div className="project-num">{p.n}</div>
               <div className="project-name">
@@ -552,8 +616,28 @@ function Work() {
                 </svg>
               </div>
             </div>
+            <div className="project-shot">
+              <img src={p.shot} alt={`${p.name} screenshot`} loading="lazy" decoding="async" />
+            </div>
           </Reveal>
         )}
+      </div>
+      <div
+        ref={preview}
+        className={"work-preview " + (active >= 0 ? "show" : "")}
+        aria-hidden="true">
+        <div className="work-preview-inner">
+          {PROJECTS.map((p, i) =>
+            seen.includes(i) ?
+            <img
+              key={p.n}
+              src={p.shot}
+              alt=""
+              className={active === i ? "on" : ""}
+              decoding="async" /> :
+            null
+          )}
+        </div>
       </div>
     </section>);
 
