@@ -57,7 +57,16 @@ const EXPERIENCE = [
     companyUrl: "https://www.linkedin.com/company/pranissa/",
     org: "Building a subscription-based longevity intelligence platform",
     desc: "Driving Next.js + FastAPI + Postgres work powering 120+ APIs and 50M+ biomarker pipelines. Migrating 87+ TSX components & 24K+ lines of CSS off legacy React/Vite onto a modular Next.js stack on AWS.",
-    tags: ["Next.js", "FastAPI", "Postgres", "AWS"]
+    tags: ["Next.js", "FastAPI", "Postgres", "AWS", "Docker", "Semantic Search", "Redis", "CDN"]
+  },
+  {
+    year: "Jun — Jul 2026",
+    role: "Software Engineer Intern",
+    roleIt: " · DataPhi Labs",
+    companyUrl: "https://www.linkedin.com/company/dataphi-labs/",
+    org: "LeaderForge — an AI coaching platform",
+    desc: "Migrated the platform off Next.js Server Actions onto ~100 standalone HTTP API routes, unblocking a Capacitor-based iOS/Android app in place of a PWA. Built participant- and admin-side workflows, shipped the Spot Coaching report flow (intake form, AI-generated PDF report, GA4 funnel tracking), and resolved 50+ tracked bugs across scheduling, assessments and tablet layouts.",
+    tags: ["Next.js", "TypeScript", "Supabase", "REST APIs", "Capacitor"]
   },
   {
     year: "Mar — Apr 2026",
@@ -85,8 +94,8 @@ const EDUCATION = [
     role: "B.Tech (Hons.), Chemical Engineering",
     roleIt: " · with a coding minor of my own",
     org: "Indian Institute of Technology, Kharagpur",
-    desc: "CGPA 8.65 / 10. Coursework spans Data Structures, Computer-Aided Process Engineering, Probability & Statistics, Transform Calculus, plus core ChE — Thermodynamics, Reaction Engineering, Mass + Heat Transfer.",
-    tags: ["ChE + CS", "CGPA 8.65"]
+    desc: "CGPA 8.10 / 10. Coursework spans Data Structures, Computer-Aided Process Engineering, Probability & Statistics, Transform Calculus, plus core ChE — Thermodynamics, Reaction Engineering, Mass + Heat Transfer.",
+    tags: ["ChE + CS", "CGPA 8.10"]
   }];
 
 
@@ -128,16 +137,17 @@ const SKILLS = [
     items: [
       ["PostgreSQL", "proficient"],
       ["MongoDB", "proficient"],
-      ["Redis", "familiar"],
+      ["Redis", "proficient"],
       ["AWS", "familiar"],
+      ["Semantic search", "proficient"],
+      ["CDN / edge caching", "familiar"],
+      ["Supabase", "proficient"],
       ["Cloudinary / Firebase", "familiar"]]
 
   },
   {
     title: "AI / Agents",
     items: [
-      ["LangGraph", "proficient"],
-      ["LangChain", "proficient"],
       ["OpenAI / Gemini / Whisper", "proficient"],
       ["DeepSeek", "familiar"],
       ["SQLAlchemy", "familiar"]]
@@ -439,7 +449,6 @@ function About() {
             <h4>Focus areas</h4>
             <ul>
               <li><span>Full-stack web</span><span>Next · FastAPI</span></li>
-              <li><span>Applied AI & agents</span><span>LangGraph</span></li>
               <li><span>Real-time systems</span><span>WebSockets</span></li>
               <li><span>Founder-mode</span><span>0 → 1</span></li>
             </ul>
@@ -491,7 +500,7 @@ function Stats() {
   return (
     <div className="stats">
       <div className="stat">
-        <div className="stat-num it"><CountUp to={8.65} /></div>
+        <div className="stat-num it"><CountUp to={8.10} /></div>
         <div className="stat-label">CGPA · IIT KGP</div>
       </div>
       <div className="stat">
@@ -499,7 +508,7 @@ function Stats() {
         <div className="stat-label">JEE Adv. percentile (190K+)</div>
       </div>
       <div className="stat">
-        <div className="stat-num"><CountUp to={3} /></div>
+        <div className="stat-num"><CountUp to={4} /></div>
         <div className="stat-label">Internships shipped</div>
       </div>
       <div className="stat">
