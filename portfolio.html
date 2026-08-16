@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://unpkg.com" crossorigin />
 <link rel="preload" href="tweaks-panel.jsx" as="fetch" crossorigin />
+<link rel="preload" href="ambient-bg.jsx" as="fetch" crossorigin />
 <link rel="preload" href="portfolio-app.jsx" as="fetch" crossorigin />
 <title>Prasad Shinde — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -173,6 +174,18 @@
     .cursor-dot, .cursor-ring { display: none; }
   }
 
+  /* ==== Ambient canvas ==== */
+  .ambient {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    display: block;
+  }
+  #root { position: relative; z-index: 1; }
+
   /* ==== Grain overlay ==== */
   .grain {
     position: fixed; inset: 0;
@@ -218,14 +231,27 @@
   }
   .nav:hover .nav-mark-icon { transform: rotate(180deg); background: var(--accent-soft); }
   .nav-links { display: flex; gap: 18px; align-items: center; }
-  .nav-links a { position: relative; padding: 6px 0; opacity: 0.7; transition: opacity 0.3s; }
+  .nav-links a { position: relative; padding: 6px 0; opacity: 0.7; transition: opacity 0.3s var(--transition); }
   .nav-links a:hover { opacity: 1; }
   .nav-links a::before {
     content: counter(navlink, decimal-leading-zero) ".";
     counter-increment: navlink;
     color: var(--ink-3);
     margin-right: 6px;
+    transition: color 0.35s var(--transition);
   }
+  .nav-links a:hover::before { color: var(--accent); }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s var(--transition);
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
   .nav-links { counter-reset: navlink; }
   .theme-toggle {
     background: transparent;
@@ -532,6 +558,17 @@
   .work-list.has-active .project { opacity: 0.38; }
   .work-list.has-active .project.is-active { opacity: 1; }
   .project { transition: opacity 0.45s var(--transition); }
+  .project::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.5s var(--transition);
+  }
+  .project:hover::before { transform: scaleY(1); }
   .work-preview {
     position: fixed;
     top: 0; left: 0;
@@ -595,7 +632,9 @@
     font-family: var(--mono);
     font-size: 12px;
     color: var(--ink-3);
+    transition: color 0.4s var(--transition);
   }
+  .project:hover .project-num { color: var(--accent); }
   .project-name {
     font-family: var(--serif);
     font-size: clamp(28px, 3.4vw, 48px);
@@ -628,7 +667,7 @@
     background: var(--accent);
     border-color: var(--accent);
     color: #fff;
-    transform: rotate(-45deg);
+    transform: translateX(4px) rotate(-45deg);
   }
   @media (max-width: 800px) {
     .project-row {
@@ -653,7 +692,7 @@
     padding: 36px 0;
     border-bottom: 1px solid var(--line);
     align-items: start;
-    transition: background 0.4s;
+    transition: background 0.4s, padding 0.45s var(--transition);
   }
   .exp-row:hover { background: var(--bg-2); padding-left: 16px; padding-right: 16px; }
   .exp-year {
@@ -738,7 +777,9 @@
     color: var(--ink-2);
     border-bottom: 1px dashed var(--line);
     display: flex; justify-content: space-between;
+    transition: color 0.3s var(--transition), border-color 0.3s;
   }
+  .skill-card li:hover { color: var(--ink); border-bottom-color: var(--ink-3); }
   .skill-card li:last-child { border-bottom: none; }
   .skill-card li .level {
     color: var(--ink-3);
@@ -754,7 +795,7 @@
     padding: 24px 0;
     border-bottom: 1px solid var(--line);
     align-items: baseline;
-    transition: background 0.4s;
+    transition: background 0.4s, padding 0.45s var(--transition);
   }
   .ach:hover { background: var(--bg-2); padding-left: 14px; padding-right: 14px; }
   .ach-rank {
@@ -880,8 +921,19 @@
     color: var(--ink-3);
     flex-wrap: wrap; gap: 16px;
   }
-  .footer-meta a { transition: color 0.3s; }
+  .footer-meta a { position: relative; transition: color 0.3s var(--transition); }
   .footer-meta a:hover { color: var(--ink); }
+  .footer-meta a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--transition);
+  }
+  .footer-meta a:hover::after { transform: scaleX(1); }
   .socials {
     display: flex;
     flex-wrap: wrap;
@@ -1075,6 +1127,15 @@
   /* Magnetic link wrapper */
   .magnetic { display: inline-block; transition: transform 0.4s var(--transition); }
 
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
+  }
+
   /* hide before mount */
   #root:empty + .grain { display: none; }
 
@@ -1112,6 +1173,7 @@
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
   <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="ambient-bg.jsx"></script>
   <script type="text/babel" src="portfolio-app.jsx"></script>
 </body>
 </html>

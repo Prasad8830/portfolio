@@ -403,25 +403,6 @@ function Hero() {
           <div><b>Based in</b><br />Kharagpur, IN · remote-ready</div>
         </Reveal>
       </div>
-
-      <Reveal className="hero-proof" stagger>
-        <div>
-          <div className="hero-proof-n">120<span className="u">+</span></div>
-          <div className="hero-proof-l">APIs shipped in production</div>
-        </div>
-        <div>
-          <div className="hero-proof-n">50<span className="u">M+</span></div>
-          <div className="hero-proof-l">Biomarker records processed</div>
-        </div>
-        <div>
-          <div className="hero-proof-n">100<span className="u">/s</span></div>
-          <div className="hero-proof-l">Events through a C++ matching engine</div>
-        </div>
-        <div>
-          <div className="hero-proof-n">4</div>
-          <div className="hero-proof-l">Startup internships shipped</div>
-        </div>
-      </Reveal>
     </header>);
 
 }
@@ -893,7 +874,8 @@ const DEFAULTS = /*EDITMODE-BEGIN*/{
   "style": "studio",
   "accent": ["#6a7d31", "#9bb35a"],
   "density": "comfortable",
-  "theme": "dark"
+  "theme": "dark",
+  "ambient": "drift"
 } /*EDITMODE-END*/;
 
 const CV_URL = "https://drive.google.com/file/d/1je9OqEXj1jXGRKlxOcJ6TTgB0xro2fLX/view?usp=sharing"
@@ -958,6 +940,8 @@ function App() {
     if (accent && ACCENT_NAME_TO_PAIR[accent]) updates.accent = ACCENT_NAME_TO_PAIR[accent];
     const density = params.get("density");
     if (["compact", "comfortable", "airy"].includes(density)) updates.density = density;
+    const amb = params.get("ambient");
+    if (["off", "drift", "constellation"].includes(amb)) updates.ambient = amb;
     if (Object.keys(updates).length) {
       Object.entries(updates).forEach(([k, v]) => setTweak(k, v));
     }
@@ -1032,6 +1016,7 @@ function App() {
 
   return (
     <>
+      <Ambient mode={tweaks.ambient || "drift"} />
       <Cursor />
       <Nav theme={theme} setTheme={setTheme} />
       <BackToTop />
@@ -1090,6 +1075,15 @@ function App() {
         </TweakSection>
         <TweakSection label="Layout">
           <TweakRadio
+            label="Background"
+            value={tweaks.ambient || "drift"}
+            onChange={(v) => setTweak("ambient", v)}
+            options={[
+              { value: "off", label: "Off" },
+              { value: "drift", label: "Drift" },
+              { value: "constellation", label: "Web" }]
+            } />
+          <TweakRadio
             label="Density"
             value={tweaks.density}
             onChange={(v) => setTweak("density", v)}
@@ -1106,7 +1100,7 @@ function App() {
 
 // Wait for tweaks panel to load
 function mount() {
-  if (!window.useTweaks || !window.TweaksPanel) {
+  if (!window.useTweaks || !window.TweaksPanel || !window.Ambient) {
     setTimeout(mount, 50);
     return;
   }
