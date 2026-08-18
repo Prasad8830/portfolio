@@ -98,8 +98,8 @@ const EDUCATION = [
     role: "B.Tech (Hons.), Chemical Engineering",
     roleIt: " · with a coding minor of my own",
     org: "Indian Institute of Technology, Kharagpur",
-    desc: "CGPA 8.10 / 10. Coursework spans Data Structures, Computer-Aided Process Engineering, Probability & Statistics, Transform Calculus, plus core ChE — Thermodynamics, Reaction Engineering, Mass + Heat Transfer.",
-    tags: ["ChE + CS", "CGPA 8.10"]
+    desc: "CGPA 8.65 / 10. Coursework spans Data Structures, Computer-Aided Process Engineering, Probability & Statistics, Transform Calculus, plus core ChE — Thermodynamics, Reaction Engineering, Mass + Heat Transfer.",
+    tags: ["ChE + CS", "CGPA 8.65"]
   }];
 
 
@@ -505,7 +505,7 @@ function Stats() {
   return (
     <div className="stats">
       <div className="stat">
-        <div className="stat-num it"><CountUp to={8.10} /></div>
+        <div className="stat-num it"><CountUp to={8.65} /></div>
         <div className="stat-label">CGPA · IIT KGP</div>
       </div>
       <div className="stat">
