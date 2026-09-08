@@ -172,19 +172,22 @@ const SKILLS = [
 
 
 const ACHIEVEMENTS = [
-  { rank: "01", title: "Open-source contributor across Rocket.Chat, IntelOwl, Aden-Hive, Traceroot AI & The Honeynet Project", where: "6+ orgs · 20+ PRs, 30+ issues" },
+  { rank: "01", title: "Open-source contributor across Traceroot.AI, GreedyBear, Meshery, cBioPortal, mcp-use, Kapso, Rocket.Chat, The Honeynet Project, Pangolin & Aden-Hive", where: "7+ orgs · 20+ PRs, 15+ bugs" },
   { rank: "02", title: "1st place · OpenSoft'26 — Inter-Hall General Championship at IIT Kharagpur", where: "Vice-Captain, 12-person team" },
-  { rank: "03", title: "Top 4.2% in JEE Advanced 2023 among 190K+ candidates nationwide", where: "earned my IIT-KGP seat" },
-  { rank: "04", title: "Top 0.9% in JEE Mains 2023 among 1M+ candidates", where: "All-India" },
-  { rank: "05", title: "Top 0.88% in MHT-CET 2023 among 600K+ candidates", where: "Maharashtra" }];
+  { rank: "03", title: "Runner-Up · Deloitte South Asia Coding Challenge", where: "nationally recognised, VibeMeter" },
+  { rank: "04", title: "Codeforces Specialist — rating 1564", where: "global rank 887 of 24K+, Div 2 round" },
+  { rank: "05", title: "Top 100 · InMobi R.I.S.E. Codies 2026", where: "nationwide, across all 12 tier-1 IITs" },
+  { rank: "06", title: "Top 4.2% in JEE Advanced 2023 among 190K+ candidates nationwide", where: "earned my IIT-KGP seat" },
+  { rank: "07", title: "Top 0.9% in JEE Mains 2023 among 1M+ candidates", where: "All-India" },
+  { rank: "08", title: "Top 0.88% in MHT-CET 2023 among 600K+ candidates", where: "Maharashtra" }];
 
 
 const PORS = [
   {
     role: "Open Source Contributor",
-    org: "Rocket.Chat · IntelOwl · Aden-Hive · Traceroot AI · Honeynet",
-    desc: "Recurring contributor across 6+ production OSS projects. 20+ PRs merged and 30+ substantive issues raised across infrastructure, security tooling, and developer experience.",
-    meta: ["Jan 2026 — Now", "6+ orgs"]
+    org: "Traceroot.AI · GreedyBear · Meshery · cBioPortal · mcp-use · Kapso · Rocket.Chat · The Honeynet Project · Pangolin · Aden-Hive",
+    desc: "Recurring contributor across 7+ production OSS projects. 20+ PRs merged and 15+ bugs raised across infrastructure, security tooling, and developer experience.",
+    meta: ["Jan 2026 — Now", "7+ orgs"]
   },
   {
     role: "Tech Team Head",
@@ -878,7 +881,7 @@ const DEFAULTS = /*EDITMODE-BEGIN*/{
   "ambient": "drift"
 } /*EDITMODE-END*/;
 
-const CV_URL = "https://drive.google.com/file/d/1nMayb_D0NViDh7jjxpAGaX-Hau_DkcCO/view?usp=sharing"
+const CV_URL = "https://drive.google.com/drive/u/0/folders/1AIEsgCrAJckL9MdXn8MJvloRbkH7ob11?lfhs=2"
 // Accent options as [light-mode hex, dark-mode hex]
 const ACCENT_OPTIONS = [
   ["#b9602c", "#d6884a"], // terracotta
