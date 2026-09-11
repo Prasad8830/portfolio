@@ -881,7 +881,7 @@ const DEFAULTS = /*EDITMODE-BEGIN*/{
   "ambient": "drift"
 } /*EDITMODE-END*/;
 
-const CV_URL = "https://drive.google.com/drive/u/0/folders/1AIEsgCrAJckL9MdXn8MJvloRbkH7ob11?lfhs=2"
+const CV_URL = "https://drive.google.com/file/d/1fC_Sddu7jSiHGoZLUDBT4rMMhN4b-xlv/view?usp=sharing"
 // Accent options as [light-mode hex, dark-mode hex]
 const ACCENT_OPTIONS = [
   ["#b9602c", "#d6884a"], // terracotta
